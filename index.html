@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mohammed Farhan Ali — Cloud Engineer</title>
+<style>
+  :root {
+    --bg: #0b0d12;
+    --bg-alt: #10131a;
+    --card: #151922;
+    --border: #232836;
+    --text: #e9ebf0;
+    --muted: #8a90a0;
+    --accent: #6ee7b7;
+    --accent2: #60a5fa;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+  }
+  a { color: var(--accent2); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .container { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(11,13,18,0.85);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  nav .container { display: flex; justify-content: space-between; align-items: center; height: 60px; }
+  nav .brand { font-weight: 700; font-size: 15px; }
+  nav .links { display: flex; gap: 22px; font-size: 14px; }
+  nav .links a { color: var(--muted); }
+  nav .links a:hover { color: var(--text); text-decoration: none; }
+
+  header.hero {
+    padding: 90px 0 70px;
+    background: radial-gradient(circle at 20% 20%, rgba(110,231,183,0.08), transparent 45%),
+                radial-gradient(circle at 80% 0%, rgba(96,165,250,0.08), transparent 40%);
+  }
+  .tag {
+    display: inline-block;
+    font-size: 12px;
+    color: var(--accent);
+    border: 1px solid rgba(110,231,183,0.3);
+    background: rgba(110,231,183,0.06);
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+    letter-spacing: 0.3px;
+  }
+  h1 { font-size: 40px; line-height: 1.2; margin-bottom: 10px; }
+  .role { font-size: 18px; color: var(--muted); margin-bottom: 22px; }
+  .stack { font-size: 14px; color: var(--accent2); margin-bottom: 24px; }
+  .hero-meta { display: flex; flex-wrap: wrap; gap: 14px; font-size: 13px; color: var(--muted); margin-bottom: 28px; }
+  .hero-meta span { display: flex; align-items: center; gap: 6px; }
+  .cta { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .btn.primary { background: var(--accent); color: #0b0d12; }
+  .btn.primary:hover { text-decoration: none; opacity: 0.9; }
+  .btn.secondary { border: 1px solid var(--border); color: var(--text); }
+  .btn.secondary:hover { text-decoration: none; border-color: var(--muted); }
+
+  section { padding: 60px 0; border-top: 1px solid var(--border); }
+  h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); margin-bottom: 28px; }
+  h2 span { color: var(--accent); }
+
+  .about-text { font-size: 15px; color: #c5c9d3; max-width: 700px; }
+
+  .job { margin-bottom: 32px; }
+  .job:last-child { margin-bottom: 0; }
+  .job-head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+  .job-title { font-size: 16px; font-weight: 700; }
+  .job-company { color: var(--accent2); font-weight: 500; }
+  .job-date { font-size: 13px; color: var(--muted); white-space: nowrap; }
+  .job ul { padding-left: 18px; color: #c5c9d3; font-size: 14px; }
+  .job li { margin-bottom: 6px; }
+
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 18px; }
+  .project-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+  }
+  .project-card h3 { font-size: 16px; margin-bottom: 8px; }
+  .project-card p { font-size: 13.5px; color: var(--muted); flex: 1; margin-bottom: 14px; }
+  .tech-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+  .tech-pill {
+    font-size: 11px;
+    color: var(--accent2);
+    background: rgba(96,165,250,0.08);
+    border: 1px solid rgba(96,165,250,0.2);
+    padding: 3px 8px;
+    border-radius: 20px;
+  }
+  .project-link { font-size: 13px; font-weight: 600; }
+
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px; }
+  .skill-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px;
+  }
+  .skill-card h4 { font-size: 13px; color: var(--accent); margin-bottom: 10px; }
+  .skill-card p { font-size: 13.5px; color: #c5c9d3; }
+
+  .certs { list-style: none; }
+  .certs li {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+  }
+  .certs li:last-child { border-bottom: none; }
+  .certs .badge { font-size: 12px; color: var(--muted); }
+
+  .edu-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .edu-card .degree { font-weight: 700; font-size: 15px; margin-bottom: 4px; }
+  .edu-card .school { color: var(--muted); font-size: 13.5px; }
+
+  footer {
+    padding: 50px 0 70px;
+    text-align: center;
+    border-top: 1px solid var(--border);
+  }
+  footer .links { display: flex; justify-content: center; gap: 24px; margin-bottom: 16px; font-size: 14px; }
+  footer .copy { color: var(--muted); font-size: 12.5px; }
+
+  @media (max-width: 600px) {
+    h1 { font-size: 30px; }
+    nav .links { gap: 14px; font-size: 13px; }
+  }
+
+  /* ---- dynamic additions ---- */
+  #progress-bar {
+    position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    z-index: 100;
+    transition: width 0.1s ease-out;
+  }
+
+  nav .links a { position: relative; padding-bottom: 4px; transition: color 0.2s; }
+  nav .links a::after {
+    content: ""; position: absolute; left: 0; bottom: 0;
+    width: 0%; height: 2px; background: var(--accent);
+    transition: width 0.25s ease;
+  }
+  nav .links a:hover::after, nav .links a.active::after { width: 100%; }
+  nav .links a.active { color: var(--accent); }
+
+  header.hero { position: relative; overflow: hidden; }
+  #hero-canvas { position: absolute; inset: 0; z-index: 0; opacity: 0.5; }
+  header.hero .container { position: relative; z-index: 1; }
+
+  .tag { animation: fadeUp 0.7s ease both; }
+  h1 { animation: fadeUp 0.7s ease 0.08s both; }
+  .role-line { min-height: 26px; }
+  .role { display: inline-block; animation: fadeUp 0.7s ease 0.16s both; }
+  .cursor { display: inline-block; width: 2px; background: var(--accent); margin-left: 2px; animation: blink 0.9s steps(1) infinite; }
+  .stack { animation: fadeUp 0.7s ease 0.24s both; }
+  .hero-meta { animation: fadeUp 0.7s ease 0.32s both; }
+  .cta { animation: fadeUp 0.7s ease 0.4s both; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  .btn.primary { position: relative; overflow: hidden; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+  .btn.primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(110,231,183,0.25); }
+  .btn.secondary { transition: transform 0.2s ease, border-color 0.2s ease; }
+  .btn.secondary:hover { transform: translateY(-2px); }
+
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.in-view { opacity: 1; transform: translateY(0); }
+
+  .stats-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 16px; margin-top: 34px;
+  }
+  .stat-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 18px; text-align: center;
+  }
+  .stat-num { font-size: 28px; font-weight: 800; color: var(--accent); }
+  .stat-num span.suffix { color: var(--accent2); }
+  .stat-label { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+  .job { position: relative; padding-left: 22px; border-left: 2px solid var(--border); transition: border-color 0.3s; }
+  .job:hover { border-left-color: var(--accent); }
+  .job::before {
+    content: ""; position: absolute; left: -7px; top: 4px;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--bg); border: 2px solid var(--muted);
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .job:hover::before { border-color: var(--accent); background: var(--accent); }
+
+  .project-card { transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease; }
+  .project-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(110,231,183,0.4);
+    box-shadow: 0 14px 30px rgba(0,0,0,0.35);
+  }
+  .project-link { position: relative; }
+  .project-link::after { content: "→"; display: none; }
+
+  .skill-card { transition: transform 0.25s ease, border-color 0.25s ease; }
+  .skill-card:hover { transform: translateY(-4px); border-color: rgba(96,165,250,0.4); }
+
+  .certs li { transition: padding-left 0.2s ease, color 0.2s ease; }
+  .certs li:hover { padding-left: 8px; color: var(--accent); }
+  .certs li a { color: var(--accent2); font-weight: 600; }
+  .certs li a:hover { color: var(--accent); text-decoration: none; }
+
+  /* ---- dynamic scroll additions ---- */
+  #hero-canvas { will-change: transform; }
+  header.hero .container { will-change: transform, opacity; transition: opacity 0.1s linear; }
+
+  #side-dots {
+    position: fixed; right: 26px; top: 50%; transform: translateY(-50%);
+    display: flex; flex-direction: column; gap: 14px; z-index: 50;
+  }
+  #side-dots a {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--border); border: 1px solid var(--muted);
+    display: block; position: relative; transition: background 0.25s, transform 0.25s, border-color 0.25s;
+  }
+  #side-dots a::after {
+    content: attr(data-label);
+    position: absolute; right: 18px; top: 50%; transform: translateY(-50%);
+    font-size: 11px; color: var(--muted); white-space: nowrap;
+    opacity: 0; pointer-events: none; transition: opacity 0.2s;
+  }
+  #side-dots a:hover::after { opacity: 1; }
+  #side-dots a.active { background: var(--accent); border-color: var(--accent); transform: scale(1.4); }
+  @media (max-width: 900px) { #side-dots { display: none; } }
+
+  section h2 {
+    position: relative;
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(36px) scale(0.98);
+    filter: blur(6px);
+    transition: opacity 0.7s cubic-bezier(.2,.7,.3,1), transform 0.7s cubic-bezier(.2,.7,.3,1), filter 0.7s ease;
+  }
+  .reveal.in-view { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+
+  .stagger-item {
+    opacity: 0; transform: translateY(22px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .stagger-item.in-view { opacity: 1; transform: translateY(0); }
+
+  .section-counter {
+    position: absolute; right: 0; top: -6px;
+    font-size: 60px; font-weight: 800; color: transparent;
+    -webkit-text-stroke: 1px var(--border);
+    line-height: 1; user-select: none; pointer-events: none;
+    display: none;
+  }
+  @media (min-width: 960px) {
+    .section-counter { display: block; }
+  }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<div id="side-dots">
+  <a href="#about" data-label="About"></a>
+  <a href="#experience" data-label="Experience"></a>
+  <a href="#projects" data-label="Projects"></a>
+  <a href="#skills" data-label="Skills"></a>
+  <a href="#certifications" data-label="Certifications"></a>
+  <a href="#contact" data-label="Contact"></a>
+</div>
+
+<nav>
+  <div class="container">
+    <div class="brand">Mohammed Farhan Ali</div>
+    <div class="links">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="container">
+    <div class="tag">Open to opportunities across Germany</div>
+    <h1>Mohammed Farhan Ali</h1>
+    <div class="role-line"><span class="role" id="typedRole"></span><span class="cursor">&nbsp;</span></div>
+    <div class="stack">AZ-104 Certified &nbsp;·&nbsp; Valid German work permit — no sponsorship required &nbsp;·&nbsp; Available immediately</div>
+    <div class="hero-meta">
+      <span>📍 Duisburg, Germany</span>
+      <span>✉️ farhande13@gmail.com</span>
+      <span>📞 +49 152 124 17265</span>
+      <span>🗣️ English (C1) · German (A2, learning)</span>
+    </div>
+    <div class="cta">
+      <a class="btn primary" href="https://www.linkedin.com/in/mohammedfarhan1/" target="_blank">LinkedIn</a>
+      <a class="btn secondary" href="https://github.com/MoFarhan01" target="_blank">GitHub</a>
+      <a class="btn secondary" href="https://mail.google.com/mail/?view=cm&fs=1&to=farhande13@gmail.com&su=Reaching%20out%20from%20your%20portfolio" target="_blank">Email Me</a>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-num" data-target="2.5" data-decimals="1">0</div><div class="stat-label">Years Experience</div></div>
+      <div class="stat-card"><div class="stat-num" data-target="2000" data-suffix="+">0</div><div class="stat-label">VMs Managed</div></div>
+      <div class="stat-card"><div class="stat-num" data-target="4">0</div><div class="stat-label">IaC Projects Shipped</div></div>
+      <div class="stat-card"><div class="stat-num" data-target="3" data-suffix="/mo">0</div><div class="stat-label">P1/P2 Incidents Resolved</div></div>
+    </div>
+  </div>
+</header>
+
+<section id="about" class="reveal">
+  <div class="container">
+    <h2>0<span>1</span> — About</h2>
+    <p class="about-text">
+      I like infrastructure that doesn't need me to babysit it. Over the past 2.5 years I've spent most of my time
+      turning manual, error-prone cloud operations into things that just run: standing up over 2,000 VMs across
+      Azure and AWS, writing Terraform instead of clicking through consoles, and building monitoring that catches
+      problems before they page anyone at 3am. I've sat on both sides of an incident, the one triaging it and the
+      one making sure it doesn't happen twice. These days that means fewer fire drills and more systems that are
+      boring in the best way. Currently based in Duisburg, learning German, and looking for a team that takes
+      infrastructure as seriously as I do.
+    </p>
+  </div>
+</section>
+
+<section id="experience" class="reveal">
+  <div class="container">
+    <h2>0<span>2</span> — Experience</h2>
+
+    <div class="job">
+      <div class="job-head">
+        <div><span class="job-title">Machine Learning Data Associate II</span> — <span class="job-company">Amazon</span></div>
+        <div class="job-date">Jul 2025 – Feb 2026 · Chennai, India</div>
+      </div>
+      <ul>
+        <li>Secured and operated production infrastructure, enforcing least-privilege IAM access, patch/update management, and compliance monitoring across systems.</li>
+        <li>Automated recurring operational and security workflows with Bash scripting, standardizing processes to reduce manual effort and improve consistency.</li>
+        <li>Monitored infrastructure health and availability using CloudWatch, maintaining structured documentation of incidents and recurring issues for audit and compliance.</li>
+        <li>Awarded Star Performer for measurable contributions to system reliability and operational quality.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-head">
+        <div><span class="job-title">Junior Incident Manager</span> — <span class="job-company">WPP plc</span></div>
+        <div class="job-date">Feb 2024 – Jun 2025 · Chennai, India</div>
+      </div>
+      <ul>
+        <li>Administered and standardized Microsoft Azure cloud infrastructure across 2,000+ Windows and Linux VMs, covering network architecture, VNet segmentation, security groups, and access governance.</li>
+        <li>Built and maintained reusable Terraform-based infrastructure templates and automation runbooks, reducing configuration drift across environments.</li>
+        <li>Implemented CI/CD pipelines with security gates (Azure DevOps, GitHub Actions) enforcing infrastructure-as-code best practices.</li>
+        <li>Managed identity and access via Microsoft Entra ID, including provisioning, permissions, and least-privilege enforcement.</li>
+        <li>Built proactive monitoring and observability (Prometheus, Grafana, Azure Monitor, KQL) to detect anomalies and support cost/performance optimization.</li>
+        <li>Led resolution of ~3 P1/P2 incidents per month, handling root cause analysis, remediation, and post-mortem documentation.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-head">
+        <div><span class="job-title">Cloud Engineer Intern</span> — <span class="job-company">WPP plc</span></div>
+        <div class="job-date">Aug 2023 – Jan 2024 · Chennai, India</div>
+      </div>
+      <ul>
+        <li>Provisioned secure Azure infrastructure (VMs, VNets, NSGs, Storage Accounts) using infrastructure hardening and least-privilege principles.</li>
+        <li>Configured firewall rules, DNS, and network security controls in a live enterprise environment.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="projects" class="reveal">
+  <div class="container">
+    <h2>0<span>3</span> — Projects</h2>
+    <div class="projects-grid">
+
+      <div class="project-card stagger-item">
+        <h3>Azure Infrastructure Deployment with Terraform</h3>
+        <p>Provisions a complete Azure networking stack (VNet, Subnet, NSG, SSH rule, Public IP) entirely through Terraform IaC, with remote state stored in Azure Blob Storage for team collaboration.</p>
+        <div class="tech-row">
+          <span class="tech-pill">Terraform</span><span class="tech-pill">Azure</span>
+          <span class="tech-pill">Azure CLI</span><span class="tech-pill">Blob Storage</span>
+        </div>
+        <a class="project-link" href="https://github.com/MoFarhan01/azure-terraform-project" target="_blank">View on GitHub →</a>
+      </div>
+
+      <div class="project-card stagger-item">
+        <h3>Azure Monitor & Log Analytics Dashboard</h3>
+        <p>End-to-end VM monitoring solution using Azure Monitor Agent, a Log Analytics Workspace, KQL queries, and automated alert rules. Simulates production incident detection on CPU thresholds.</p>
+        <div class="tech-row">
+          <span class="tech-pill">Azure Monitor</span><span class="tech-pill">Log Analytics</span>
+          <span class="tech-pill">KQL</span><span class="tech-pill">Alert Rules</span>
+        </div>
+        <a class="project-link" href="https://github.com/MoFarhan01/azure-monitor-log-analytics-dashboard" target="_blank">View on GitHub →</a>
+      </div>
+
+      <div class="project-card stagger-item">
+        <h3>AWS Observability Stack (Prometheus + Grafana)</h3>
+        <p>Full observability pipeline on AWS EC2: Node Exporter collects metrics → Prometheus scrapes and stores them → Grafana visualizes CPU, memory, disk, and network via custom dashboards.</p>
+        <div class="tech-row">
+          <span class="tech-pill">AWS EC2</span><span class="tech-pill">Prometheus</span>
+          <span class="tech-pill">Grafana</span><span class="tech-pill">Bash</span>
+        </div>
+        <a class="project-link" href="https://github.com/MoFarhan01/aws-prometheus-grafana-monitoring" target="_blank">View on GitHub →</a>
+      </div>
+
+      <div class="project-card stagger-item">
+        <h3>Kubernetes Workload Deployment & Orchestration</h3>
+        <p>Deploys a containerized Nginx application on Kubernetes (Docker Desktop), exposes it via NodePort, and demonstrates horizontal scaling to 3 replicas using kubectl, all defined via YAML manifests.</p>
+        <div class="tech-row">
+          <span class="tech-pill">Kubernetes</span><span class="tech-pill">Docker</span>
+          <span class="tech-pill">kubectl</span><span class="tech-pill">YAML</span>
+        </div>
+        <a class="project-link" href="https://github.com/MoFarhan01/kubernetes-nginx-deployment" target="_blank">View on GitHub →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="skills" class="reveal">
+  <div class="container">
+    <h2>0<span>4</span> — Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-card stagger-item">
+        <h4>Cloud Platforms</h4>
+        <p>Microsoft Azure (AZ-104), AWS (EC2, S3, Lambda, SageMaker), hybrid multi-cloud</p>
+      </div>
+      <div class="skill-card stagger-item">
+        <h4>IaC & Automation</h4>
+        <p>Terraform, ARM Templates, PowerShell, Bash, Python, GitHub Actions, Azure DevOps, Git</p>
+      </div>
+      <div class="skill-card stagger-item">
+        <h4>Monitoring & Cost</h4>
+        <p>Azure Monitor, Prometheus, Grafana, CloudWatch, KQL, performance & cost optimization</p>
+      </div>
+      <div class="skill-card stagger-item">
+        <h4>Containers</h4>
+        <p>Docker, Kubernetes (deployments, RBAC, network policies), kubectl, YAML, container security</p>
+      </div>
+      <div class="skill-card stagger-item">
+        <h4>Identity & Security</h4>
+        <p>Microsoft Entra ID, IAM, RBAC, least-privilege access, cloud security concepts</p>
+      </div>
+      <div class="skill-card stagger-item">
+        <h4>Systems & Networking</h4>
+        <p>Windows Server, Linux, DNS, firewall/NSG rules, VNets</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="certifications" class="reveal">
+  <div class="container">
+    <h2>0<span>5</span> — Certifications & Education</h2>
+    <ul class="certs">
+      <li><a href="https://learn.microsoft.com/en-us/users/mohammedfarhanali-3550/credentials/certification/azure-administrator" target="_blank">Microsoft Certified: Azure Administrator Associate (AZ-104) ↗</a><span class="badge">Earned Jan 2026 · Expires Feb 2027</span></li>
+      <li><a href="https://learn.microsoft.com/en-us/users/mohammedfarhanali-3550/credentials/certification/azure-fundamentals" target="_blank">Microsoft Certified: Azure Fundamentals (AZ-900) ↗</a><span class="badge">Earned Oct 2024</span></li>
+      <li><span>AWS Solutions Architect Associate (SAA-C03)</span><span class="badge">In progress</span></li>
+      <li><span>DevOps Concepts — A Cloud Guru</span><span class="badge">Completed</span></li>
+    </ul>
+    <div style="height:20px"></div>
+    <div class="edu-card">
+      <div class="degree">B.Tech — Information Technology</div>
+      <div class="school">Anna University, Chennai, India · 2020 – 2024</div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="container">
+    <h2>Get in touch</h2>
+    <div class="links">
+      <a href="https://www.linkedin.com/in/mohammedfarhan1/" target="_blank">LinkedIn</a>
+      <a href="https://github.com/MoFarhan01" target="_blank">GitHub</a>
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=farhande13@gmail.com&su=Reaching%20out%20from%20your%20portfolio" target="_blank">farhande13@gmail.com</a>
+    </div>
+    <div class="copy">Mohammed Farhan Ali · Duisburg, Germany · Built with intent, not templates.</div>
+  </div>
+</footer>
+
+<script>
+  // Scroll progress bar
+  const progressBar = document.getElementById("progress-bar");
+  function updateProgress() {
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    progressBar.style.width = scrolled + "%";
+  }
+  document.addEventListener("scroll", updateProgress);
+  updateProgress();
+
+  // Typing effect for role
+  const roles = [
+    "Cloud Engineer — Azure · AWS · Terraform",
+    "Infrastructure as Code — Terraform · ARM",
+    "Containers & Orchestration — Docker · Kubernetes",
+    "Observability — Prometheus · Grafana · Azure Monitor"
+  ];
+  const typedEl = document.getElementById("typedRole");
+  let ri = 0, ci = 0, deleting = false;
+  function typeLoop() {
+    const current = roles[ri];
+    if (!deleting) {
+      ci++;
+      typedEl.textContent = current.slice(0, ci);
+      if (ci === current.length) { deleting = true; setTimeout(typeLoop, 1600); return; }
+    } else {
+      ci--;
+      typedEl.textContent = current.slice(0, ci);
+      if (ci === 0) { deleting = false; ri = (ri + 1) % roles.length; }
+    }
+    setTimeout(typeLoop, deleting ? 30 : 45);
+  }
+  typeLoop();
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll(".reveal");
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("in-view"); });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+
+  // Staggered grid item reveal
+  const staggerGroups = document.querySelectorAll(".projects-grid, .skills-grid");
+  staggerGroups.forEach(group => {
+    const items = group.querySelectorAll(".stagger-item");
+    const groupIO = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          items.forEach((item, i) => {
+            setTimeout(() => item.classList.add("in-view"), i * 90);
+          });
+          groupIO.disconnect();
+        }
+      });
+    }, { threshold: 0.15 });
+    groupIO.observe(group);
+  });
+
+  // Side dot nav — active state + smooth click scroll
+  const sideDots = document.querySelectorAll("#side-dots a");
+  sideDots.forEach(dot => {
+    dot.addEventListener("click", (e) => {
+      e.preventDefault();
+      document.querySelector(dot.getAttribute("href")).scrollIntoView({ behavior: "smooth" });
+    });
+  });
+  function updateSideDots() {
+    let idx = 0;
+    sideDots.forEach((dot, i) => {
+      const sec = document.querySelector(dot.getAttribute("href"));
+      if (sec && sec.getBoundingClientRect().top <= 140) idx = i;
+    });
+    sideDots.forEach(d => d.classList.remove("active"));
+    sideDots[idx].classList.add("active");
+  }
+  document.addEventListener("scroll", updateSideDots);
+  updateSideDots();
+
+  // Hero parallax
+  const heroContainer = document.querySelector("header.hero .container");
+  const heroCanvasEl = document.getElementById("hero-canvas");
+  const heroSection = document.querySelector("header.hero");
+  function updateParallax() {
+    const heroHeight = heroSection.offsetHeight;
+    const y = window.scrollY;
+    const ratio = Math.min(y / heroHeight, 1);
+    heroCanvasEl.style.transform = `translateY(${y * 0.25}px)`;
+    heroContainer.style.transform = `translateY(${y * 0.15}px)`;
+    heroContainer.style.opacity = String(1 - ratio * 1.1);
+  }
+  document.addEventListener("scroll", updateParallax);
+  updateParallax();
+
+  // Animated stat counters
+  const statEls = document.querySelectorAll(".stat-num");
+  const statIO = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const target = parseFloat(el.dataset.target);
+      const decimals = parseInt(el.dataset.decimals || "0");
+      const suffix = el.dataset.suffix || "";
+      const duration = 1200;
+      const start = performance.now();
+      function step(now) {
+        const p = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        const val = target * eased;
+        el.textContent = val.toFixed(decimals) + (p === 1 ? suffix : "");
+        if (p < 1) requestAnimationFrame(step);
+        else el.innerHTML = target.toFixed(decimals) + '<span class="suffix">' + suffix + '</span>';
+      }
+      requestAnimationFrame(step);
+      statIO.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  statEls.forEach(el => statIO.observe(el));
+
+  // Active nav link on scroll
+  const navLinks = document.querySelectorAll("nav .links a");
+  const sections = Array.from(navLinks).map(a => document.querySelector(a.getAttribute("href")));
+  function updateActiveNav() {
+    let idx = 0;
+    sections.forEach((sec, i) => {
+      if (sec && sec.getBoundingClientRect().top <= 100) idx = i;
+    });
+    navLinks.forEach(a => a.classList.remove("active"));
+    navLinks[idx].classList.add("active");
+  }
+  document.addEventListener("scroll", updateActiveNav);
+  updateActiveNav();
+
+  // Hero canvas — animated node network
+  const canvas = document.getElementById("hero-canvas");
+  const ctx = canvas.getContext("2d");
+  let w, h, nodes;
+  function resize() {
+    const hero = document.querySelector(".hero");
+    w = canvas.width = hero.offsetWidth;
+    h = canvas.height = hero.offsetHeight;
+  }
+  function initNodes() {
+    const count = Math.floor((w * h) / 22000);
+    nodes = Array.from({ length: count }, () => ({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      vx: (Math.random() - 0.5) * 0.4,
+      vy: (Math.random() - 0.5) * 0.4
+    }));
+  }
+  function drawFrame() {
+    ctx.clearRect(0, 0, w, h);
+    nodes.forEach(n => {
+      n.x += n.vx; n.y += n.vy;
+      if (n.x < 0 || n.x > w) n.vx *= -1;
+      if (n.y < 0 || n.y > h) n.vy *= -1;
+    });
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 120) {
+          ctx.strokeStyle = `rgba(110,231,183,${0.12 * (1 - dist / 120)})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+    nodes.forEach(n => {
+      ctx.fillStyle = "rgba(96,165,250,0.5)";
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, 1.6, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    requestAnimationFrame(drawFrame);
+  }
+  window.addEventListener("resize", () => { resize(); initNodes(); });
+  resize(); initNodes(); drawFrame();
+</script>
+
+</body>
+</html>
